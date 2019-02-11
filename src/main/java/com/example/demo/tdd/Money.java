@@ -1,31 +1,43 @@
 package com.example.demo.tdd;
 
-abstract class Money {
+import java.util.Objects;
 
-
-    abstract String currency();
+class Money {
 
     protected int amount;
 
     protected String currency;
 
-     Money times(int multiplier){
-        return new Money(amount*multiplier,currency);
+    Money(int amount, String currency) {
+        this.amount = amount;
+        this.currency = currency;
     }
 
-    static Dollar dollar(int amount){
-        return new Dollar(amount,"USD");
+     String currency(){
+        return currency;
+     }
+
+    Money times(int multiplier){
+        return new Money(multiplier*amount,currency);
     }
 
-    static Franc franc(int amount){
-        return new Franc(amount,"CHF");
+    static Money dollar(int amount){
+        return new Money(amount,"USD");
     }
+
+    static Money franc(int amount){
+        return new Money(amount,"CHF");
+    }
+
+
 
     public boolean equals(Object o) {
         Money money = (Money) o;
         return amount == money.amount && currency().equals(money.currency());
     }
 
-
+    public String toString(){
+        return amount + " " + currency;
+    }
 
 }
